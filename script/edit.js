@@ -162,10 +162,10 @@ tbody.addEventListener('click', function(e) {
 ////////////////////Click nút Submit
 
 submitBtn.addEventListener('click', function () {
-	const isConfirm = confirm('Are you sure?');
-	if (!isConfirm) return;
 	const data = validatedForm();
 	if (data) {
+		const isConfirm = confirm('Are you sure?');
+		if (!isConfirm) return;
 		petArr.forEach((value, index) => {
 			if (value.id === data.id) {
 				petArr.splice(index,1,data)

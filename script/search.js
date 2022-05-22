@@ -25,23 +25,6 @@ function getInput() {
     return data;
 }
 
-////////////////////Hàm hiển thị các breed
-
-function renderBreedFind() {
-	let data = [];
-	breedArr.forEach(value => data.push(value.breed));//Mảng lấy tất cả các breed từ breedArr
-	data = new Set(data);//Xóa các breed giống nhau
-	//Đặt select về mặc định 1 option 'Select Breed'
-	breedInput.innerHTML = '<option>Select Breed</option>';
-	//Hiển thị các breed trong mảng data
-	data.forEach(value => {
-		const option = document.createElement('option');
-		option.textContent = value;
-		breedInput.appendChild(option);
-	})
-}
-renderBreedFind();
-
 ////////////////////Hàm nhận vào 2 object để so sánh và trả về true hoặc false
 
 function filterObject(objectCondition, objectOrigin) {
@@ -96,6 +79,44 @@ function renderTableData(pets) {
         tbody.appendChild(row);
     })
 }
+
+////////////////////Hàm hiển thị các breed trong mục tìm kiếm
+
+function renderBreedFind() {
+	let data = [];
+	breedArr.forEach(value => data.push(value.breed));//Mảng lấy tất cả các breed từ breedArr
+	data = new Set(data);//Xóa các breed giống nhau
+	//Đặt select về mặc định 1 option 'Select Breed'
+	breedInput.innerHTML = '<option>Select Breed</option>';
+	//Hiển thị các breed trong mảng data
+	if (typeInput.value === 'Select Type') {//Khi không chọn type hiển thị tất cả các breed
+		data.forEach(value => {
+			const option = document.createElement('option');
+			option.textContent = value;
+			breedInput.appendChild(option);
+		})
+	} else if (typeInput.value === 'Dog') {
+		breedArr.filter(value => value.type === 'Dog').forEach(bread => {
+			const option = document.createElement('option');
+			option.textContent = bread.breed;
+			breedInput.appendChild(option);
+		})
+	} else {
+		breedArr.filter(value => value.type === 'Cat').forEach(bread => {
+			const option = document.createElement('option');
+			option.textContent = bread.breed;
+			breedInput.appendChild(option);
+		})
+	}	
+}
+
+////////////////////Hiển thị các breed nếu type = Select Type
+
+renderBreedFind();
+
+////////////////////Hiển thị các breed khi người dùng đã chọn type và click vào breed button
+
+typeInput.addEventListener('change', renderBreedFind);
 
 ////////////////////Click Find
 

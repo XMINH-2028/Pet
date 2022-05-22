@@ -60,6 +60,7 @@ function getFromStorage(string) {
 	
 }
 
+
 ////////////////////Hàm hiển thị các breed
 
 function renderBreed() {
@@ -81,6 +82,7 @@ function renderBreed() {
 	}
 	
 }
+
 
 
 
